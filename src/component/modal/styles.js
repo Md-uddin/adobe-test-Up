@@ -1,7 +1,7 @@
 import { Heading } from '@adobe/react-spectrum';
 import styled from 'styled-components';
 
-export const H3 = styled.h3`
+export const H3 = styled.div`
   text-align: left;
   font-size: 1.5rem;
   margin: 0;
