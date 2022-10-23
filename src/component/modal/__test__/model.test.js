@@ -10,7 +10,9 @@ describe('Modal', () => {
       <Modal {...props} />
     </Provider>
   );
-
+  beforeEach(() => {
+    user.setup();
+  });
   ////tests
   it('should render all the required elements', () => {
     render(renderModal());
@@ -33,7 +35,6 @@ describe('Modal', () => {
     expect(saveBtn).toBeVisible();
   });
   it('it should close on clicking cancel', async () => {
-    user.setup();
     let closeFunction = jest.fn();
     render(
       renderModal({
@@ -46,7 +47,6 @@ describe('Modal', () => {
     expect(closeFunction).toBeCalled();
   });
   it('it should type the Email', async () => {
-    user.setup();
     render(renderModal());
     let Email = 'me@gmail.com';
     const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
@@ -55,7 +55,7 @@ describe('Modal', () => {
   });
 
   // it('save function should work properly', async () => {
-  //   user.setup();
+  //
   //   render(renderModal());
   //   const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
   //   // await user.type(Emailinput, 'me@gmail.com');
@@ -63,15 +63,31 @@ describe('Modal', () => {
   //   const checkBox = screen.findByRole('checkbox', { name: /select illustrator \(10gb photography plan\) 16 \/ 25/i });
   // });
   it('The save button should perform action properly', async () => {
-    user.setup();
     render(renderModal());
     const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
     console.log(Emailinput);
     const checkBox = screen.findByRole('checkbox', { name: /select illustrator \(10gb photography plan\) 16 \/ 25/i });
     const saveBtn = screen.getByRole('button', { name: /save/i });
-    await user.type(Emailinput, 'me@gmail.com');
-    await user.click(checkBox);
+    console.log(Emailinput, checkBox, saveBtn);
+    // await user.type(Emailinput, 'me@gmail.com');
+    // await user.click(checkBox);
+    // await user.click(saveBtn);
+    // expect(screen.getByText(/add user to your team/i)).not.toBeVisible();
+  });
+  it('On Click save button should perform the assigned action', async () => {
+    let closeFunction = jest.fn();
+    render(
+      renderModal({
+        close: closeFunction,
+      })
+    );
+    const heading = screen.getByRole('heading', {
+      name: /add user to your team you can add a new user below by entering their email address\./i,
+    });
+    const emailType = screen.getByRole('textbox', { name: /enter email/i });
+    const saveBtn = screen.getByRole('button', { name: /save/i });
     await user.click(saveBtn);
-    expect(screen.getByText(/add user to your team/i)).not.toBeVisible();
+    await user.type(emailType, 'me@gmail.com');
+    expect(heading).not.toBeVisible();
   });
 });
