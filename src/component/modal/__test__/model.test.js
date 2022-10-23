@@ -54,40 +54,4 @@ describe('Modal', () => {
     expect(Emailinput).toHaveValue(Email);
   });
 
-  // it('save function should work properly', async () => {
-  //
-  //   render(renderModal());
-  //   const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
-  //   // await user.type(Emailinput, 'me@gmail.com');
-  //   // expect(Emailinput).toHaveValue(Email);
-  //   const checkBox = screen.findByRole('checkbox', { name: /select illustrator \(10gb photography plan\) 16 \/ 25/i });
-  // });
-  it('The save button should perform action properly', async () => {
-    render(renderModal());
-    const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
-    console.log(Emailinput);
-    const checkBox = screen.findByRole('checkbox', { name: /select illustrator \(10gb photography plan\) 16 \/ 25/i });
-    const saveBtn = screen.getByRole('button', { name: /save/i });
-    console.log(Emailinput, checkBox, saveBtn);
-    // await user.type(Emailinput, 'me@gmail.com');
-    // await user.click(checkBox);
-    // await user.click(saveBtn);
-    // expect(screen.getByText(/add user to your team/i)).not.toBeVisible();
-  });
-  it('On Click save button should perform the assigned action', async () => {
-    let closeFunction = jest.fn();
-    render(
-      renderModal({
-        close: closeFunction,
-      })
-    );
-    const heading = screen.getByRole('heading', {
-      name: /add user to your team you can add a new user below by entering their email address\./i,
-    });
-    const emailType = screen.getByRole('textbox', { name: /enter email/i });
-    const saveBtn = screen.getByRole('button', { name: /save/i });
-    await user.click(saveBtn);
-    await user.type(emailType, 'me@gmail.com');
-    expect(heading).not.toBeVisible();
-  });
 });
