@@ -14,25 +14,15 @@ describe('Modal', () => {
     user.setup();
   });
   ////tests
-  it('should render all the required elements', () => {
+  it('should render  the modal', () => {
     render(renderModal());
     const heading = screen.getByRole('heading', {
       name: /add user to your team you can add a new user below by entering their email address\./i,
     });
     const headingLabel = screen.getByText(/you can add a new user below by entering their email address\./i);
-    const Emailinput = screen.getByRole('textbox', { name: /enter email/i });
-    const productsHeading = screen.getByRole('heading', { name: /assign products/i });
 
-    const link = screen.getByRole('link', { name: /click here to buy more licenses/i });
-    const cancelBtn = screen.getByRole('button', { name: /cancel/i });
-    const saveBtn = screen.getByRole('button', { name: /save/i });
     expect(heading).toBeVisible();
     expect(headingLabel).toBeVisible();
-    expect(Emailinput).toBeVisible();
-    expect(productsHeading).toBeVisible();
-    expect(link).toBeVisible();
-    expect(cancelBtn).toBeVisible();
-    expect(saveBtn).toBeVisible();
   });
   it('it should close on clicking cancel', async () => {
     let closeFunction = jest.fn();
@@ -41,7 +31,6 @@ describe('Modal', () => {
         close: closeFunction,
       })
     );
-
     const cancelBtn = screen.getByRole('button', { name: /cancel/i });
     await user.click(cancelBtn);
     expect(closeFunction).toBeCalled();
@@ -53,5 +42,4 @@ describe('Modal', () => {
     await user.type(Emailinput, Email);
     expect(Emailinput).toHaveValue(Email);
   });
-
 });
