@@ -8,7 +8,7 @@ const ModalForm = ({ email, setEmail, firstName, setFirstName, lastName, setLast
       <Flex gap="size-150" columnGap={'size-350'} wrap>
         <TextField
           label="Enter email"
-          marginEnd="size-1000"
+          marginEnd={{ M: 'size-1000' }}
           validationState={isValid ? 'valid' : 'invalid'}
           value={email}
           onChange={setEmail}
